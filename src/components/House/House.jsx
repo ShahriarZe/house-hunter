@@ -6,6 +6,8 @@ import fifth from '../../assets/fifth.jpeg';
 
 const House = () => {
   const [searchPrice, setSearchPrice] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const housesPerPage = 10;
   const houses = [
     {
       imgSrc: one,
@@ -42,12 +44,144 @@ const House = () => {
       location: 'Denver City',
       description: 'Cozy House nestled in the Mountains and Fountain',
     },
+    {
+      imgSrc: two,
+      title: 'Mountain Cozy House',
+      price: '$1150/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: three,
+      title: 'Mountain Cozy House',
+      price: '$1100/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: two,
+      title: 'Mountain Cozy House',
+      price: '$1200/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: fifth,
+      title: 'Mountain Cozy House',
+      price: '$1300/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: three,
+      title: 'Mountain Cozy House',
+      price: '$500/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: two,
+      title: 'Mountain Cozy House',
+      price: '$600/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: fifth,
+      title: 'Mountain Cozy House',
+      price: '$500/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: two,
+      title: 'Mountain Cozy House',
+      price: '$1200/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: three,
+      title: 'Mountain Cozy House',
+      price: '$1100/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: two,
+      title: 'Mountain Cozy House',
+      price: '$1000/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: one,
+      title: 'Mountain Cozy House',
+      price: '$1900/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: fifth,
+      title: 'Mountain Cozy House',
+      price: '$1000/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: three,
+      title: 'Mountain Cozy House',
+      price: '$1200/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: two,
+      title: 'Mountain Cozy House',
+      price: '$900/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: one,
+      title: 'Mountain Cozy House',
+      price: '$1300/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: three,
+      title: 'Mountain Cozy House',
+      price: '$1400/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: fifth,
+      title: 'Mountain Cozy House',
+      price: '$1200/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
+    {
+      imgSrc: two,
+      title: 'Mountain Cozy House',
+      price: '$1100/per month',
+      location: 'Denver City',
+      description: 'Cozy House nestled in the Mountains and Fountain',
+    },
   ];
 
   
   const filteredHouses = houses.filter((house) =>
     house.price.toLowerCase().includes(searchPrice.toLowerCase())
   );
+
+  const indexOfLastHouse = currentPage * housesPerPage;
+  const indexOfFirstHouse = indexOfLastHouse - housesPerPage;
+  const currentHouses = filteredHouses.slice(indexOfFirstHouse, indexOfLastHouse);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="container mx-auto mt-20">
@@ -68,7 +202,7 @@ const House = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredHouses.map((house, index) => (
+        {currentHouses.map((house, index) => (
           <div key={index} className="card bg-base-100 shadow-xl">
             <figure className="px-10 pt-10">
               <img src={house.imgSrc} alt="House" className="rounded-xl" />
@@ -83,6 +217,21 @@ const House = () => {
               </div>
             </div>
           </div>
+        ))}
+      </div>
+
+
+      <div className="flex justify-center mt-4">
+        {Array.from({ length: Math.ceil(filteredHouses.length / housesPerPage) }).map((_, index) => (
+          <button
+            key={index}
+            className={`mx-2 px-4 py-2 ${
+              currentPage === index + 1 ? 'bg-primary text-white' : 'bg-base-100 text-primary'
+            }`}
+            onClick={() => paginate(index + 1)}
+          >
+            {index + 1}
+          </button>
         ))}
       </div>
     </div>
