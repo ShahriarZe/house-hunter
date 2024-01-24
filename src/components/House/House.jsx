@@ -195,7 +195,7 @@ const House = () => {
           type="text"
           id="searchPrice"
           className="mt-1 p-2 border rounded-md"
-          placeholder="Enter price"
+          placeholder="Enter rent"
           value={searchPrice}
           onChange={(e) => setSearchPrice(e.target.value)}
         />

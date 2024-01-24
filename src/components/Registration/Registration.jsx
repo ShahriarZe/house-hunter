@@ -13,6 +13,18 @@ const Registration = () => {
                     <form className="card-body">
                         <div className="form-control">
                             <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input type="text" placeholder="name" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Phone</span>
+                            </label>
+                            <input type="number" placeholder="phone" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
                             <input type="email" placeholder="email" className="input input-bordered" required />
